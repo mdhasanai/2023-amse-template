@@ -3,20 +3,21 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+This data science project involves analyzing aggregated air quality data in and around Aachen and the data from Continuous Air Quality Monitoring Network (LUQS, Monthly Reports on Air Quality in NRW). The analysis will focus on identifying patterns and trends in the air quality data and exploring potential correlations with the different types of sensors and devices used. The project will use statistical and machine-learning approaches to get meaningful insights from the data.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
 The analysis helps XY to do YZ.
+Analyzing the air quality data has several benefits, such as identifying periods and areas with poor air quality, assessing the effectiveness of policies, and promoting environmental awareness. Ultimately, these insights can lead to improvements in environmental sustainability, and public health etc.
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+* Metadata URL: https://mobilithek.info/offers/-6211083015561254713
+* Data URL: https://data.europa.eu/data/datasets/0c499f11-8473-4d1e-88d4-a8a70ee4866c?locale=en
 * Data Type: CSV
 
 Short description.
@@ -25,7 +26,14 @@ Short description.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Data collection and Pre-processing [#1][i1]
+2. Feature engineering [#2][i2]
+3. Statistical modeling [#3][i3]
+4. Interpretation and insights [#4][i4]
+5. Reporting on findings [#5][i5]
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+[i1]: https://github.com/mdhasanai/2023-amse-template/issues/1
+[i2]: https://github.com/mdhasanai/2023-amse-template/issues/2
+[i3]: https://github.com/mdhasanai/2023-amse-template/issues/3
+[i4]: https://github.com/mdhasanai/2023-amse-template/issues/4
+[i5]: https://github.com/mdhasanai/2023-amse-template/issues/5
