@@ -68,10 +68,7 @@ def process_data(df):
     return df
 
 
-def store_data(df, conn, table_name, db_path="./database/"):
-    # connect to an existing database or create a new one if it doesn’t exist
-    
-    
+def store_data(df, conn, table_name):    
     # Store the DataFrame in the database table
     #df.to_sql(table_name, conn, if_exists="replace", index=False)
     df.to_sql(table_name, conn, if_exists="replace", index=False)
@@ -83,7 +80,6 @@ def load_data_from_database(conn, table_name):
     
     # Execute the SQL query and load the data into a DataFrame
     df = pd.read_sql_query(query, conn)
-
     return df
 
 main()
