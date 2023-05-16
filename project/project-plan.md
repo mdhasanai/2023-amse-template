@@ -3,27 +3,27 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This data science project involves analyzing aggregated air quality data in and around Aachen and the data from Continuous Air Quality Monitoring Network (LUQS, Monthly Reports on Air Quality in NRW). The analysis will focus on identifying patterns and trends in the air quality data and exploring potential correlations with the different types of sensors and devices used. The project will use statistical and machine-learning approaches to get meaningful insights from the data.
+This data science project involves analyzing the availability and usage of electric vehicle charging stations in Germany. The analysis will focus on identifying usages patterns. The project will use statistical and machine-learning approaches to get meaningful insights from the data.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-Analyzing the air quality data has several benefits, such as identifying periods and areas with poor air quality, assessing the effectiveness of policies, and promoting environmental awareness. Ultimately, these insights can lead to improvements in environmental sustainability, and public health etc.
+Analyzing the air quality data has several benefits, such as identifying usages patterns and areas with needs for charging station. Ultimately, these insights can lead to improvements in environmental sustainability etc.
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: Air quality data August 2021
-* Metadata URL: https://mobilithek.info/offers/-6211083015561254713
-* Data URL: https://www.mcloud.de/downloads/mcloud/27899FD1-EBC5-428D-9214-996752F42EBB/AirQuality_Datensatz_August2021_Aachen.csv
+### Datasource1: Electric Charging Station
+* Metadata URL: https://mobilithek.info/offers/-2989425250318611078
+* Data URL: https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-ladesaulen-in-deutschland/exports/csv
 * Data Type: CSV
 
 Short description.
 
-### Datasource2: Continuous Air Quality Monitoring Network (LUQS, Monthly Reports on Air Quality in NRW)
-* Metadata URL: https://data.europa.eu/data/datasets/0c499f11-8473-4d1e-88d4-a8a70ee4866c?locale=en
-* Data URL: https://www.opengeodata.nrw.de/produkte/umwelt_klima/luftqualitaet/luqs/konti_monatsberichte/
+### Datasource2: E-Ladesäulenregister
+* Metadata URL: https://www.govdata.de/web/guest/daten/-/details/e-ladesaulenregister
+* Data URL: https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeulenregister.xlsx?__blob=publicationFile&v=21
 * Data Type: CSV
 
 ## Work Packages
