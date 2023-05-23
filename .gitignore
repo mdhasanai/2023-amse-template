@@ -34,7 +34,7 @@ MANIFEST
 
 # add
 data/database/data.db
-exercises/database/data.db
+exercises/database/airports.sqlite
 
 # Unit test / coverage reports
 htmlcov/

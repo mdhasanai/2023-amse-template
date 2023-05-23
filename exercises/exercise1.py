@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData, Table, Column, String, Integer
 
 
 def get_config():
@@ -16,8 +16,8 @@ def get_config():
     conf = {
         "source1": source,
         "database_dir": "./database",
-        "database_name": "data.db",
-        "table_name" : "table1",
+        "database_name": "airports.sqlite",
+        "table_name" : "airports",
         "transformation": {
             "drop_missing_value": False,
             "drop_duplicate": False
@@ -68,13 +68,38 @@ class ETL:
         Returns:
             response: return the response
         """
+        # Define the metadata and table schema
+        metadata = MetaData()
         
+        # Generate the column types from the DataFrame
+        column_types = {column: String(length=255) if dtype == 'object' else Integer() for column, dtype in df.dtypes.items()}
+
+        # Define the table using the column types
+        data_table = Table(
+            table_name,
+            metadata,
+            Column('id', Integer, primary_key=True),
+            *(Column(column, column_type) for column, column_type in column_types.items())
+        )
+
+
         print("Pushing the data into databse")
         status = 440
         message = ''
         try:
+            # Create the table in the database
+            metadata.create_all(engine)
+            
+            # Convert the DataFrame to a list of dictionaries
+            data_to_insert = df.to_dict(orient='records')
+            
+            # Open a connection and insert the data into the table
+            with engine.begin() as connection:
+                connection.execute(data_table.insert(), data_to_insert)
+
+
             # Write the data from the DataFrame into the table
-            df.to_sql(table_name, engine, if_exists="replace", index=False)
+            # df.to_sql(table_name, engine, if_exists="replace", index=False)
             status = 500
             message = "data intertion success!"
         except Exception as e:
@@ -83,12 +108,16 @@ class ETL:
         return {"message": message, "status": status}
        
        
-    def pull_data_from_databse(self, engine=None):
+    def pull_data_from_databse(self, engine=None, table_name=None):
         """ Pull the data from the database
         Returns:
             response: return data as dataframe
         """
         
+        # Setting default table name to load
+        if table_name is None:
+            table_name = self.config['table_name']
+            
         status = 440
         message = ''
         loaded_df = None
@@ -98,7 +127,7 @@ class ETL:
                 engine = create_engine(f"sqlite:///{databse_path}")
                 
                 # Load the database from the folder
-                loaded_df = pd.read_sql_table('table1', engine)
+                loaded_df = pd.read_sql_table(table_name, engine)
                 status = 500
                 message = "data extraction success!"
             except Exception as e:
