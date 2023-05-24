@@ -16,7 +16,7 @@ def get_config():
     conf = {
         "source1": source,
         "database_dir": "./database",
-        "database_name": "airports.sqlite",
+        "database_name": "sqlite:///airports.sqlite",
         "table_name" : "airports",
         "transformation": {
             "drop_missing_value": False,
@@ -123,9 +123,9 @@ class ETL:
         loaded_df = None
         if engine is None:
             try:
-                # databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
-		databse_path = self.config["database_name"]
-                engine = create_engine(f"sqlite:///{databse_path}")
+                #databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
+                database_path = self.config["database_name"]
+                engine = create_engine(f"{database_path}")
                 
                 # Load the database from the folder
                 loaded_df = pd.read_sql_table(table_name, engine)
@@ -148,8 +148,10 @@ class ETL:
         os.makedirs("./database", exist_ok=True)
         
         # Defining SQLAlchemy connection
-        databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
-        engine = create_engine(f"sqlite:///{databse_path}") 
+        # databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
+        databse_path = self.config["database_name"]
+        print(databse_path)
+        engine = create_engine(f"{databse_path}")
         
         # Loading
         df = self.load_data()
