@@ -123,7 +123,8 @@ class ETL:
         loaded_df = None
         if engine is None:
             try:
-                databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
+                # databse_path = os.path.join(self.config["database_dir"], self.config["database_name"])
+		databse_path = self.config["database_name"]
                 engine = create_engine(f"sqlite:///{databse_path}")
                 
                 # Load the database from the folder
