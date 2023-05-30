@@ -9,6 +9,8 @@ source_2 = "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete
 
 table_name_1 = "table1"
 table_name_2 = "table2"
+save_in_local = True
+
 
 def main():
     
@@ -20,7 +22,7 @@ def main():
     print("Database connection success!!!")
 
     # Load data from the database into a DataFrame
-    df_1, df_2 = pull_data(source_1, source_2)
+    df_1, df_2 = pull_data(source_1, source_2, save_in_local)
     print("Pulled data from the data sources")
 
     # Perform data analysis or manipulations on the DataFrame
@@ -29,8 +31,8 @@ def main():
     print("Processed dataset")
 
     # Save the processed data to a new table in the database
-    store_data(processed_df1, conn, table_name_1, conn)
-    store_data(processed_df2, conn, table_name_2, conn)
+    store_data(processed_df1, conn, table_name_1)
+    store_data(processed_df2, conn, table_name_2)
     print("data stored in the database")
 
     # Closing the database connection
@@ -38,7 +40,7 @@ def main():
     print("Completed!!!")
   
     
-def pull_data(data_source1, data_source2):
+def pull_data(data_source1, data_source2, save_in_local):
     """ Pulling the data from the data sources
 
     Returns:
@@ -47,6 +49,10 @@ def pull_data(data_source1, data_source2):
     # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(data_source1, delimiter=';', encoding='latin-1')
     dff = pd.read_excel(data_source2, skiprows=10)
+    
+    if save_in_local:
+        df.to_csv("./database/source1.csv", sep='\t', encoding='utf-8')
+        dff.to_csv("./database/source2.csv", sep='\t', encoding='utf-8')
     return df, dff
 
 
@@ -62,9 +68,9 @@ def process_data(df):
         # Dropping rows or columns with missing values
         df.dropna()
     
-    # Step2: Clean and transform the data
-    # Removing duplicates
-    df.drop_duplicates()
+        # Step2: Clean and transform the data
+        # Removing duplicates
+        df.drop_duplicates()
     return df
 
 
@@ -82,4 +88,5 @@ def load_data_from_database(conn, table_name):
     df = pd.read_sql_query(query, conn)
     return df
 
-main()
+if __name__ == '__main__':
+    main()
