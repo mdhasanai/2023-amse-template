@@ -9,7 +9,7 @@ source_2 = "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete
 
 table_name_1 = "table1"
 table_name_2 = "table2"
-save_in_local = True
+save_in_local = False
 
 
 def main():
