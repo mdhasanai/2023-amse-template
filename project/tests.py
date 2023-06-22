@@ -13,7 +13,6 @@ print(os.path.dirname(__file__))
 
 class TestDataPull(unittest.TestCase):
     def test_pull_data(self):
-        
         # Defining Data Sources
         source_1 = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-ladesaulen-in-deutschland/exports/csv"
         source_2 = "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeulenregister.xlsx?__blob=publicationFile&v=21"
@@ -34,7 +33,6 @@ class TestDataPull(unittest.TestCase):
         
         #self.assertTrue(dff.equals(expected_dff), "DataFrame from source 2 ('dff') does not match the expected result.")
         #self.assertTrue(len(dff)==len(expected_dff), "Data is not same size from source 1")
-        
         conn.close()
         
 if __name__ == '__main__':
