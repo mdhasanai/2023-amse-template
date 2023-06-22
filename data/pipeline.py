@@ -17,6 +17,7 @@ def main():
     # Make a folder
     os.makedirs("./database", exist_ok=True)
 
+
     # Connect to the SQLite database
     conn = db.connect('./database/data.db')
     print("Database connection success!!!")
