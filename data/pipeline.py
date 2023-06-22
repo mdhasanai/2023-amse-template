@@ -7,9 +7,11 @@ import sqlite3 as db
 source_1 = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-ladesaulen-in-deutschland/exports/csv"
 source_2 = "https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeulenregister.xlsx?__blob=publicationFile&v=21"
 
+
 table_name_1 = "table1"
 table_name_2 = "table2"
 save_in_local = False
+
 
 def main():
     
