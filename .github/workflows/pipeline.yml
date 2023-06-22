@@ -1,0 +1,29 @@
+name: Project Pipeline
+
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'project/**'
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+          # Install python
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+            python-version: 3.8
+
+      - name: Run file
+        run: |
+          cd ./project/
+          chmod +x test.sh
+          sh test.sh
