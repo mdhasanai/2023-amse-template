@@ -11,12 +11,10 @@ table_name_1 = "table1"
 table_name_2 = "table2"
 save_in_local = False
 
-
 def main():
     
     # Make a folder
     os.makedirs("./database", exist_ok=True)
-
 
     # Connect to the SQLite database
     conn = db.connect('./database/data.db')
