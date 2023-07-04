@@ -1,0 +1,80 @@
+
+// Transform data: syntax: https://jvalue.github.io/jayvee/docs/user/transforms
+transform CelsiusToFahrenheit {
+    from tempCelsius oftype decimal;
+    to tempFahrenheit oftype decimal;
+
+    tempFahrenheit: ((tempCelsius * 9) / 5) + 32 ;
+}
+
+pipeline TemperaturePipeline {
+
+    // Download and unzip data
+    block TemperatureExtractor oftype HttpExtractor {
+        // https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    // Unzipping Data
+    block TemperatureArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    // Use the “data.csv” in the zip file 
+    block TemperatureFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block TemperatureFileInterpreter oftype TextFileInterpreter{}
+
+    block TemperatureCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    block TemperatureColumnDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I,  column L, column M, column N, column O];
+    }
+
+    // Reshape data
+    block TemperatureTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Geraet" oftype integer,
+            "Hersteller" oftype text,
+            "Model" oftype text,
+            "Monat" oftype integer,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
+            "Geraet aktiv" oftype text,
+        ];
+    }
+
+    block TemperatureTableTransformer oftype TableTransformer {
+        inputColumn: 'Temperatur';
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block BatterieTemperatureTableTransformer oftype TableTransformer {
+        inputColumn: 'Batterietemperatur';
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    // Write data into a SQLite database called “temperatures.sqlite”, in the table “temperatures”
+    block TemperatureSQLiteLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+
+    TemperatureExtractor
+        ->TemperatureArchiveInterpreter
+        ->TemperatureFilePicker
+        ->TemperatureFileInterpreter
+        ->TemperatureCSVInterpreter
+        ->TemperatureColumnDeleter
+        ->TemperatureTableInterpreter
+        ->TemperatureTableTransformer
+        ->BatterieTemperatureTableTransformer
+        ->TemperatureSQLiteLoader;
+}
